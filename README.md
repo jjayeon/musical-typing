@@ -8,7 +8,7 @@ After cloning this repo, run the `install_docker.sh` script as root to set up Do
 
 ## Usage
 
-The app should be accessible locally at localhost:5000, bypassing the SSL cert stuff.  As for production, the app as written expects to be running on the domain tonetype.tech; if it's not, the SSL cert/nginx container will almost certainly raise a problem.  If you're someone other than an MLH fellow assigned to work on this project, please fork, configure, and hack to your heart's content.
+The app should be accessible locally at `localhost:5000`, bypassing the SSL cert stuff.  As for production, the app as written expects to be running on the domain `tonetype.tech`; if it's not, the SSL cert/nginx container will almost certainly raise a problem.  If you're someone other than an MLH fellow assigned to work on this project, please fork, configure, and hack to your heart's content.
 
 ## A Beginner's Guide to Flask
 
