@@ -16,30 +16,20 @@
     </head>
     <body>
 	<div id="bg">
-	    <h1><a href="/">Autumn Chiu</a></h1>
+	    <h1><a href="/">{{ title }}</a></h1>
 	    <div id="heading">
-		<span><a href="#">Projects</a></span>
-		<span><a href="/blog/">Blog</a></span>
-		<span><a href="/mlh/">MLH</a></span>
+		<span><a href="/">Projects</a></span>
+		<span><a href="/">Blog</a></span>
 	    </div>
 	    <div id="main">
 		<div id="left"
-		     {% if text == "" %}
-		     style="display:none;"
-		     {% endif %}>
-		    {{ text|markdown }}
+		    {{ text }}
 		</div>
 		
 		<div id="right">
 		    <i>
 			<p>Autumn Chiu is a programmer, writer, and the best of the mediocre chess players.  She is currently studying with MLH as a Production Engineering fellow.</p>
-			<p>Latest:</p>
 		    </i>
-		    <ul>
-			{% for post in posts %}
-			<li><a href="/blog/{{ post }}">{{ post_titles[loop.index0] }}</a></li>
-			{% endfor %}
-		    </ul>
 		</div>
 	    </div>
 	</div>
