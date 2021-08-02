@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+	<meta
+	    name="viewport"
+	    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+	    />
+	<meta property="og:title" content="Autumn Chiu" />
+	<meta property="og:description" content="Blog and projects for Autumn Chiu" />
+
+	<link lang="sass" rel="stylesheet" href="/static/styles/blog.css" />
+	<link rel="icon" href="/static/img/favicon.ico" type="image/x-icon" />
+	<title>{{ title }}</title>
+    </head>
+    <body>
+	<div id="bg">
+	    <h1><a href="/">Autumn Chiu</a></h1>
+	    <div id="heading">
+		<span><a href="#">Projects</a></span>
+		<span><a href="/blog/">Blog</a></span>
+		<span><a href="/mlh/">MLH</a></span>
+	    </div>
+	    <div id="main">
+		<div id="left"
+		     {% if text == "" %}
+		     style="display:none;"
+		     {% endif %}>
+		    {{ text|markdown }}
+		</div>
+		
+		<div id="right">
+		    <i>
+			<p>Autumn Chiu is a programmer, writer, and the best of the mediocre chess players.  She is currently studying with MLH as a Production Engineering fellow.</p>
+			<p>Latest:</p>
+		    </i>
+		    <ul>
+			{% for post in posts %}
+			<li><a href="/blog/{{ post }}">{{ post_titles[loop.index0] }}</a></li>
+			{% endfor %}
+		    </ul>
+		</div>
+	    </div>
+	</div>
+    </body>
+</html>

@@ -1,0 +1,49 @@
+{
+    "name": "Lavina Stella Harper",
+    "title": "Web Developer",
+    "education": {
+        "degree": "B.S. Computer Science",
+        "school": "University of the People",
+        "date": "2016-2020"
+    },
+    "about": "this is an about for Lavina.",
+
+    "skills": ["HTML", "CSS", "JavaScript", "React.js", "Bootstrap"],
+
+    "Experience": [
+        {
+            "name": "Front-End Web Development - Figma",
+            "date": "2020-Present",
+            "details": "frontend web details"
+        },
+        {
+            "name": "Back-End Web Development - Figma",
+            "date": "2019-2020",
+            "details": "backend web details"
+        }
+    ],
+    "Projects": [
+        {
+            "name": "Web Design",
+            "date": "2020-Present",
+            "details": "Project details for web design"
+        },
+        {
+            "name": "Bright Ideas",
+            "date": "2019-2020",
+            "details": "project details for bright ideas"
+        }
+    ],
+    "Accomplishments": [
+        {
+            "name": "Whatever it is",
+            "date": "2018",
+            "details": "accomplishment 1 details"
+        },
+        {
+            "name": "Accomplishment 2",
+            "date": "2019",
+            "details": "accomplishment 2 details"
+        }
+    ]
+}
