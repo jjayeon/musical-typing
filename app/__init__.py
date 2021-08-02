@@ -29,6 +29,7 @@ app.config[
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
+
 class UserModel(db.Model):
     __tablename__ = "users"
 
@@ -42,6 +43,7 @@ class UserModel(db.Model):
     def __repr__(self):
         return f"<User {self.username}>"
 
+
 @app.route("/")
 def index():
     return render_template(
@@ -50,11 +52,14 @@ def index():
         text="Test page for now.  Will make new page soon.",
     )
 
+
 @app.route("/health/")
 def health():
     return "im healthy!"
 
+
 # database shenanigans
+
 
 @app.route("/register/", methods=("GET", "POST"))
 def register():
