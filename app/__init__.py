@@ -1,6 +1,4 @@
 import os
-import re
-import json
 from flask import Flask, render_template, request
 
 # from dotenv import load_dotenv
@@ -83,7 +81,7 @@ def register():
         else:
             return error, 418
     # TODO: return a register page
-    return render_template("login.html", data=data, mode="register")
+    return render_template("login.html", mode="register")
 
 
 @app.route("/login/", methods=("GET", "POST"))
@@ -105,4 +103,4 @@ def login():
         else:
             return error, 418
         # TODO: Return a login page
-    return render_template("login.html", data=data, mode="login")
+    return render_template("login.html", mode="login")
