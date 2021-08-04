@@ -12,7 +12,7 @@ from flask_migrate import Migrate
 # load_dotenv()
 
 app = Flask(__name__)
-app.secret_key="abc"
+app.secret_key = "abc"
 app.url_map.strict_slashes = False
 app.config[
     "SQLALCHEMY_DATABASE_URI"
@@ -45,13 +45,10 @@ class UserModel(db.Model):
 @app.route("/")
 @app.route("/play")
 def index():
-    username=""
+    username = ""
     if "username" in session:
-        username=session["username"]
-    return render_template(
-        "layout.html",
-        username=username
-    )
+        username = session["username"]
+    return render_template("layout.html", username=username)
 
 
 @app.route("/health/")
@@ -61,14 +58,17 @@ def health():
 
 # user shenanigans
 
+
 @app.route("/user/")
 def user():
     return 'TODO: make user page <form action="/logout/" method="post" target="_self"> <input type="submit" value="logout"> </form> <a href="/">home</a>'
+
 
 @app.route("/logout/", methods=["POST"])
 def logout():
     session.pop("username")
     return 'logout successful. <a href="/">home</a>'
+
 
 @app.route("/user/register/", methods=("GET", "POST"))
 def register():
@@ -91,9 +91,9 @@ def register():
             return f'User {username} created successfully. <a href="/">home</a>'
         else:
             return error, 418
-    username=""
+    username = ""
     if "username" in session:
-        username=session["username"]
+        username = session["username"]
     return render_template("login.html", mode="register", username=username)
 
 
@@ -117,7 +117,7 @@ def login():
         else:
             return error, 418
         # TODO: Return a login page
-    username=""
+    username = ""
     if "username" in session:
-        username=session["username"]
+        username = session["username"]
     return render_template("login.html", mode="login", username=username)
