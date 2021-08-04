@@ -5,5 +5,6 @@ __pycache__
 nginx-certbot.env
 python3-virtualenv/
 python3-module/
+env/
 flask.sqlite
 *~

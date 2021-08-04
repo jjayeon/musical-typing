@@ -22,17 +22,18 @@
 	<title>{% block header %}{% endblock %}</title>
     </head>
     <header>
-	<a href="/mlh/login/">Login</a>
-	<a href="/mlh/register/">Register</a>
+	{% if username != "" %}
+	<a href="/user/">{{ username }}</a>
+	{% else %}
+	<a href="/user/login/">Login</a>
+	<a href="/user/register/">Register</a>
+	{% endif %}
     </header>
     <body>
 	<div class="profile">
 	    <div class="row">
 		<div class="column">
 		    <h2>Hi! I am</h2>
-		    <h1>{{ data["name"] }}</h1>
-		    <h4>{{ data["title"] }}</h4>
-		    <text>{{ data["about"] }}</text>
 		</div>
 		<div class="column">
 		    <a href="/"><img src="/static/img/profile-pic.png" style="width: 275px; height: 225px" /></a>
@@ -40,6 +41,6 @@
 		
 	    </div>
 	</div>
+	{% block body %}{% endblock %}
     </body>
-    {% block body %}{% endblock %}
 </html>
