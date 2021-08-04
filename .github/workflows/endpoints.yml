@@ -33,5 +33,5 @@ jobs:
       - name: Test site endpoints
         run: >-
           docker-compose up -d &&
-          sleep 5
+          sleep 5 &&
           ./test_endpoints.sh localhost:5000
