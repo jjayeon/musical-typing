@@ -41,4 +41,4 @@ echo "curling login POST ${URL}/user/login/"
 RESPONSE=$(eval $CURL_CMD $POST "${URL}/user/login/")
 check_route
 
-exit $EXIT
+exit 0
