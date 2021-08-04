@@ -34,4 +34,5 @@ jobs:
         run: >-
           docker-compose up -d &&
           sleep 5 &&
-          ./test_endpoints.sh localhost:5000
+          ./test_endpoints.sh localhost:5000 &&
+          docker-compose logs
