@@ -61,7 +61,11 @@ def health():
 
 @app.route("/user/")
 def user():
-    return 'TODO: make user page <form action="/logout/" method="post" target="_self"> <input type="submit" value="logout"> </form> <a href="/">home</a>'
+    return ('TODO: make user page '
+            '<form action="/logout/" method="post" target="_self"> '
+            '<input type="submit" value="logout"> '
+            '</form> '
+            '<a href="/">home</a>')
 
 
 @app.route("/logout/", methods=["POST"])
