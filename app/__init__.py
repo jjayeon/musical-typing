@@ -6,16 +6,18 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
 app = Flask(__name__)
-app.secret_key = ("iwaHjRoi3uOtJ64QONnL"
-                  "nEHkXfASet5RnDzpeL1n"
-                  "AUezFRYhoUYWvVkEvqBy"
-                  "GSbQ7M8jkA7I41mzo6ey"
-                  "PWT09pb8KZGszvMek0XB"
-                  "JBLWvO5D7WDzbWK5yHsi"
-                  "mXYwxouO9UDjyjsKBoUD"
-                  "a8Ttdn69XpOj5zzpvwtd"
-                  "LQha5BNXntVFBzJfYtBs"
-                  "KRX4vRKyzwmVyWGHVm21")
+app.secret_key = (
+    "iwaHjRoi3uOtJ64QONnL"
+    "nEHkXfASet5RnDzpeL1n"
+    "AUezFRYhoUYWvVkEvqBy"
+    "GSbQ7M8jkA7I41mzo6ey"
+    "PWT09pb8KZGszvMek0XB"
+    "JBLWvO5D7WDzbWK5yHsi"
+    "mXYwxouO9UDjyjsKBoUD"
+    "a8Ttdn69XpOj5zzpvwtd"
+    "LQha5BNXntVFBzJfYtBs"
+    "KRX4vRKyzwmVyWGHVm21"
+)
 
 app.url_map.strict_slashes = False
 app.config[
@@ -53,9 +55,11 @@ def index():
         username = session["username"]
     return render_template("layout.html", username=username)
 
+
 @app.route("/play/")
 def modules():
     return render_template("modules.html", username=session["username"])
+
 
 @app.route("/user/")
 def user():
@@ -66,6 +70,7 @@ def user():
         "</form> "
         '<a href="/">home</a>'
     )
+
 
 @app.route("/logout/", methods=["POST"])
 def logout():
