@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect, url_for, make_response
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
@@ -124,8 +124,10 @@ def login():
             error = "Incorrect password."
 
         if error is None:
+            response = make_response(redirect(url_for("index"), code=302))
+            response.headers["Location"] = "/"
             session["username"] = username
-            return 'Login successful. <a href="/">home</a>', 200
+            return response
         else:
             return error + ' <a href="/user/login">home</a>', 418
     username = ""
