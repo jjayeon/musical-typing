@@ -21,15 +21,15 @@
 
 <body>
 	<header class="nav-bar">
+		{% if username != "" %}
+		<a href="/user/">{{ username }}</a>
+		{% else %}
+		<ul>
+			<li><a href="/user/login/">Login</a></li>
+			<li><a href="/user/register/">Register</a></li>
+			<li><a href="/user/modules/">Modules</a></li>
+		</ul>
 		<div class="nav-content">
-			{% if username != "" %}
-			<a href="/user/">{{ username }}</a>
-			{% else %}
-			<ul>
-				<li><a href="/user/login/">Login</a></li>
-				<li><a href="/user/register/">Register</a></li>
-				<li><a href="/user/modules/">Modules</a></li>
-			</ul>
 			{% endif %}
 
 			<a href="/">
@@ -40,7 +40,9 @@
 		</div>
 	</header>
 
-	{% block body %}{% endblock %}
+	{% block body %}
+	<h1>Piano!</h1>
+	{% endblock %}
 </body>
 
 </html>
