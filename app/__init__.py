@@ -132,10 +132,7 @@ def login():
             error = "Incorrect password."
 
         if error is None:
-            response = make_response(redirect(url_for("index"), code=302))
-            response.headers["Location"] = "/"
-            session["username"] = username
-            return response
+            return redirect(url_for(".index"), code=302)
         else:
             return error + ' <a href="/user/login">home</a>', 418
     username = ""
