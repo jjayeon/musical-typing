@@ -14,18 +14,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
 app = Flask(__name__)
-app.secret_key = (
-    "iwaHjRoi3uOtJ64QONnL"
-    "nEHkXfASet5RnDzpeL1n"
-    "AUezFRYhoUYWvVkEvqBy"
-    "GSbQ7M8jkA7I41mzo6ey"
-    "PWT09pb8KZGszvMek0XB"
-    "JBLWvO5D7WDzbWK5yHsi"
-    "mXYwxouO9UDjyjsKBoUD"
-    "a8Ttdn69XpOj5zzpvwtd"
-    "LQha5BNXntVFBzJfYtBs"
-    "KRX4vRKyzwmVyWGHVm21"
-)
+app.secret_key = os.getenv("SESSION_KEY")
 
 app.url_map.strict_slashes = False
 app.config[
@@ -87,7 +76,7 @@ def user():
 def logout():
     if "username" in session:
         session.pop("username")
-    return 'Logged out successfully. <a href="/">home</a>'
+    return redirect(url_for("index"), code=302)
 
 
 @app.route("/user/register/", methods=("GET", "POST"))
@@ -109,13 +98,14 @@ def register():
             db.session.add(new_user)
             db.session.commit()
             session["username"] = username
-            return f'User {username} created successfully. <a href="/">home</a>'
+            return redirect(url_for("index"), code=302)
         else:
-            return error + ' <a href="/user/register/">back</a>', 418
-    username = ""
-    if "username" in session:
-        username = session["username"]
-    return render_template("login.html", mode="register", username=username)
+            return error + ' <br> <a href="/user/register/">back</a>', 418
+    else:
+        username = ""
+        if "username" in session:
+            username = session["username"]
+        return render_template("login.html", mode="register", username=username)
 
 
 @app.route("/user/login/", methods=("GET", "POST"))
@@ -133,12 +123,12 @@ def login():
             error = "Incorrect password."
 
         if error is None:
-            response = make_response(redirect("/", code=302))
-            response.headers["Location"] = "/"
-            return response
+            session["username"] = username
+            return redirect(url_for("index"), code=302)
         else:
-            return error + ' <a href="/user/login">home</a>', 418
-    username = ""
-    if "username" in session:
-        username = session["username"]
-    return render_template("login.html", mode="login", username=username)
+            return error + ' <br> <a href="/user/login">back</a>', 418
+    else: 
+        username = ""
+        if "username" in session:
+            username = session["username"]
+        return render_template("login.html", mode="login", username=username)
