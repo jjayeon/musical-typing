@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, redirect, url_for, session
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
@@ -61,7 +61,7 @@ def modules():
     username = ""
     if "username" in session:
         username = session["username"]
-    return render_template("modules.html")
+    return render_template("modules.html", username=username)
 
 
 @app.route("/user/")
@@ -78,7 +78,7 @@ def user():
 @app.route("/logout/", methods=["POST"])
 def logout():
     session.pop("username")
-    return 'logout successful. <a href="/">home</a>'
+    return redirect(url_for("index")) # Logout successful
 
 
 @app.route("/user/register/", methods=("GET", "POST"))
@@ -99,7 +99,8 @@ def register():
             new_user = UserModel(username, generate_password_hash(password))
             db.session.add(new_user)
             db.session.commit()
-            return f'User {username} created successfully. <a href="/">home</a>'
+            session["username"] = username
+            return redirect(url_for("index")) # f'User {username} created successfully. <a href="/">home</a>'
         else:
             return error, 418
     username = ""
@@ -124,10 +125,9 @@ def login():
 
         if error is None:
             session["username"] = username
-            return 'Login successful. <a href="/">home</a>', 200
+            return redirect(url_for("index")) # 'Login successful. <a href="/">home</a>', 200
         else:
             return error, 418
-        # TODO: Return a login page
     username = ""
     if "username" in session:
         username = session["username"]
