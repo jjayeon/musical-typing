@@ -132,7 +132,7 @@ def login():
             error = "Incorrect password."
 
         if error is None:
-            response = make_response(redirect('/', code=302))
+            response = make_response(redirect("/", code=302))
             response.headers["Location"] = "/"
             return response
         else:
