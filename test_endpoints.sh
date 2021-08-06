@@ -17,7 +17,7 @@ HEAD="-I"
 POST='-X POST -d "username=JonSmith&password=pw123"'
 
 check_route () {
-    if [[ $RESPONSE -eq 200 || $RESPONSE -eq 418 ]]
+    if [[ $RESPONSE -eq 200 || $RESPONSE -eq 418 || $RESPONSE -eq 302 ]]
     then
 	echo "response $RESPONSE ok"
     else
