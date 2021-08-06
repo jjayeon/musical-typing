@@ -89,11 +89,11 @@ def register():
         error = None
 
         if not username:
-            error = 'Username is required. <a href="/">home</a>'
+            error = 'Username is required.'
         elif not password:
-            error = 'Password is required. <a href="/">home</a>'
+            error = 'Password is required.'
         elif UserModel.query.filter_by(username=username).first() is not None:
-            error = f'User {username} is already registered. <a href="/">home</a>'
+            error = f'User {username} is already registered.'
 
         if error is None:
             new_user = UserModel(username, generate_password_hash(password))
@@ -102,7 +102,7 @@ def register():
             session["username"] = username
             return redirect(url_for("index")) # f'User {username} created successfully. <a href="/">home</a>'
         else:
-            return error, 418
+            return error + ' <a href="/user/register/">back</a>', 418
     username = ""
     if "username" in session:
         username = session["username"]
@@ -119,15 +119,15 @@ def login():
         user = UserModel.query.filter_by(username=username).first()
 
         if user is None:
-            error = 'Incorrect username. <a href="/">home</a>'
+            error = 'Incorrect username.'
         elif not check_password_hash(user.password, password):
-            error = 'Incorrect password. <a href="/">home</a>'
+            error = 'Incorrect password.'
 
         if error is None:
             session["username"] = username
             return redirect(url_for("index")) # 'Login successful. <a href="/">home</a>', 200
         else:
-            return error, 418
+            return error + ' <a href="/user/login">home</a>', 418
     username = ""
     if "username" in session:
         username = session["username"]
