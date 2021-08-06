@@ -78,11 +78,7 @@ def user():
 @app.route("/logout/", methods=["POST"])
 def logout():
     session.pop("username")
-<<<<<<< HEAD
     return redirect("/", code=302) # Logout successful
-=======
-    return redirect(url_for("index"), code=302)  # Logout successful
->>>>>>> 4a335f7faa59a87118740c07fad18821a977ae16
 
 
 @app.route("/user/register/", methods=("GET", "POST"))
@@ -104,13 +100,7 @@ def register():
             db.session.add(new_user)
             db.session.commit()
             session["username"] = username
-<<<<<<< HEAD
             return redirect("/", code=302) # f'User {username} created successfully. <a href="/">home</a>'
-=======
-            return redirect(
-                url_for("index"), code=302
-            )  # f'User {username} created successfully. <a href="/">home</a>'
->>>>>>> 4a335f7faa59a87118740c07fad18821a977ae16
         else:
             return error + ' <a href="/user/register/">back</a>', 418
     username = ""
@@ -135,13 +125,7 @@ def login():
 
         if error is None:
             session["username"] = username
-<<<<<<< HEAD
             return redirect("/", code=302) # 'Login successful. <a href="/">home</a>', 200
-=======
-            return redirect(
-                url_for("index"), code=302
-            )  # 'Login successful. <a href="/">home</a>', 200
->>>>>>> 4a335f7faa59a87118740c07fad18821a977ae16
         else:
             return error + ' <a href="/user/login">home</a>', 418
     username = ""
