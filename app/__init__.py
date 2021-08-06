@@ -5,8 +5,7 @@ from flask import (
     request,
     session,
     redirect,
-    url_for,
-    make_response,
+    url_for
 )
 
 
