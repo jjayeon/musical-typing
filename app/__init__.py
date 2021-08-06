@@ -100,8 +100,9 @@ def register():
             db.session.add(new_user)
             db.session.commit()
             session["username"] = username
-            return redirect("/", code=302)
-        # f'User {username} created successfully. <a href="/">home</a>'
+            return redirect(
+                "/", code=302
+            )  # f'User {username} created successfully. <a href="/">home</a>'
         else:
             return error + ' <a href="/user/register/">back</a>', 418
     username = ""
@@ -126,8 +127,9 @@ def login():
 
         if error is None:
             session["username"] = username
-            return redirect("/", code=302)
-        # 'Login successful. <a href="/">home</a>', 200
+            return redirect(
+                "/", code=302
+            )  # 'Login successful. <a href="/">home</a>', 200
         else:
             return error + ' <a href="/user/login">home</a>', 418
     username = ""
