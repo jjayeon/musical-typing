@@ -45,4 +45,6 @@ echo "curling logout POST ${URL}/logout/"
 RESPONSE=$(eval $CURL_CMD $POST "$URL/logout/")
 check_route
 
+docker-compose logs
+
 exit $EXIT
