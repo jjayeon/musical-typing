@@ -127,7 +127,7 @@ def login():
             return redirect(url_for("index"), code=302)
         else:
             return error + ' <br> <a href="/user/login">back</a>', 418
-    else: 
+    else:
         username = ""
         if "username" in session:
             username = session["username"]
