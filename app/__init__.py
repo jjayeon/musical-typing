@@ -1,18 +1,22 @@
 import os
 from flask import Flask, render_template, request, session
 
-# from dotenv import load_dotenv
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
-# from . import db
-# from app.db import get_db
-
-# load_dotenv()
-
 app = Flask(__name__)
-app.secret_key = "abc"
+app.secret_key = ("iwaHjRoi3uOtJ64QONnL"
+                  "nEHkXfASet5RnDzpeL1n"
+                  "AUezFRYhoUYWvVkEvqBy"
+                  "GSbQ7M8jkA7I41mzo6ey"
+                  "PWT09pb8KZGszvMek0XB"
+                  "JBLWvO5D7WDzbWK5yHsi"
+                  "mXYwxouO9UDjyjsKBoUD"
+                  "a8Ttdn69XpOj5zzpvwtd"
+                  "LQha5BNXntVFBzJfYtBs"
+                  "KRX4vRKyzwmVyWGHVm21")
+
 app.url_map.strict_slashes = False
 app.config[
     "SQLALCHEMY_DATABASE_URI"
@@ -43,21 +47,15 @@ class UserModel(db.Model):
 
 
 @app.route("/")
-@app.route("/play")
 def index():
     username = ""
     if "username" in session:
         username = session["username"]
     return render_template("layout.html", username=username)
 
-
-@app.route("/health/")
-def health():
-    return "im healthy!"
-
-
-# user shenanigans
-
+@app.route("/play/")
+def modules():
+    return render_template("modules.html", username=session["username"])
 
 @app.route("/user/")
 def user():
@@ -68,7 +66,6 @@ def user():
         "</form> "
         '<a href="/">home</a>'
     )
-
 
 @app.route("/logout/", methods=["POST"])
 def logout():
@@ -127,9 +124,3 @@ def login():
     if "username" in session:
         username = session["username"]
     return render_template("login.html", mode="login", username=username)
-
-
-# temp route to view modules page
-@app.route("/user/modules", methods=("GET", "POST"))
-def modules():
-    return render_template("modules.html")
