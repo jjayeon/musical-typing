@@ -132,7 +132,9 @@ def login():
             error = "Incorrect password."
 
         if error is None:
-            return redirect('/', code=302)
+            response = make_response(redirect('/', code=302))
+            response.headers["Location"] = "/"
+            return response
         else:
             return error + ' <a href="/user/login">home</a>', 418
     username = ""
