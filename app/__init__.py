@@ -78,7 +78,7 @@ def user():
 @app.route("/logout/", methods=["POST"])
 def logout():
     session.pop("username")
-    return redirect(url_for("index"), code=302) # Logout successful
+    return redirect(url_for("index"), code=302)  # Logout successful
 
 
 @app.route("/user/register/", methods=("GET", "POST"))
@@ -89,18 +89,20 @@ def register():
         error = None
 
         if not username:
-            error = 'Username is required.'
+            error = "Username is required."
         elif not password:
-            error = 'Password is required.'
+            error = "Password is required."
         elif UserModel.query.filter_by(username=username).first() is not None:
-            error = f'User {username} is already registered.'
+            error = f"User {username} is already registered."
 
         if error is None:
             new_user = UserModel(username, generate_password_hash(password))
             db.session.add(new_user)
             db.session.commit()
             session["username"] = username
-            return redirect(url_for("index"), code=302) # f'User {username} created successfully. <a href="/">home</a>'
+            return redirect(
+                url_for("index"), code=302
+            )  # f'User {username} created successfully. <a href="/">home</a>'
         else:
             return error + ' <a href="/user/register/">back</a>', 418
     username = ""
@@ -119,13 +121,15 @@ def login():
         user = UserModel.query.filter_by(username=username).first()
 
         if user is None:
-            error = 'Incorrect username.'
+            error = "Incorrect username."
         elif not check_password_hash(user.password, password):
-            error = 'Incorrect password.'
+            error = "Incorrect password."
 
         if error is None:
             session["username"] = username
-            return redirect(url_for("index"), code=302) # 'Login successful. <a href="/">home</a>', 200
+            return redirect(
+                url_for("index"), code=302
+            )  # 'Login successful. <a href="/">home</a>', 200
         else:
             return error + ' <a href="/user/login">home</a>', 418
     username = ""
