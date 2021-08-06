@@ -5,6 +5,7 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+/*navbar*/
 .nav-bar {
     width: 100%;
     display: inline-block;
@@ -40,7 +41,6 @@
     padding-right: 0px;
 }
 
-/*new css*/
 ul {
   list-style-type: none;
   margin: 0;
@@ -57,4 +57,50 @@ li a {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+}
+
+/*modules page*/
+.prompt {
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+}
+
+.modules {
+  font-family: 'Montserrat', sans-serif;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+td {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.module {
+  position: relative;
+  vertical-align: middle;
+  background: rgba(4, 139, 168, 0.13);
+  width: 330px;
+  margin-bottom: -10px;
+}
+
+.module img, .song img {
+  position: absolute;
+  margin-left: -10px;
+}
+
+.module h3, .song h4 {
+  padding-left: 30px;
+}
+
+.song {
+  position: relative;
+  vertical-align: middle;
+  background: rgba(4, 139, 168, 0.13);
+  width: 300px;
+  margin-left: 30px;
+  margin-bottom: -10px;
 }
