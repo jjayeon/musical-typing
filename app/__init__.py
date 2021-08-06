@@ -14,7 +14,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
 app = Flask(__name__)
-# print(os.getenv("SESSION_KEY"))
+print(os.getenv("SESSION_KEY"))
 app.secret_key = os.getenv("SESSION_KEY")
 # print(app.secret_key)
 
