@@ -58,7 +58,10 @@ def index():
 
 @app.route("/play/")
 def modules():
-    return render_template("modules.html", username=session["username"])
+    username = ""
+    if "username" in session:
+        username = session["username"]
+    return render_template("modules.html")
 
 
 @app.route("/user/")
