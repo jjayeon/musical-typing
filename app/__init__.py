@@ -85,7 +85,8 @@ def user():
 
 @app.route("/logout/", methods=["POST"])
 def logout():
-    session.pop("username")
+    if "username" in session:
+        session.pop("username")
     return 'Logged out successfully. <a href="/">home</a>'
 
 
