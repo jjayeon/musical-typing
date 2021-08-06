@@ -127,3 +127,9 @@ def login():
     if "username" in session:
         username = session["username"]
     return render_template("login.html", mode="login", username=username)
+
+
+# temp route to view modules page
+@app.route("/user/modules", methods=("GET", "POST"))
+def modules():
+    return render_template("modules.html")

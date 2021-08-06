@@ -1,46 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+
+<head>
 	<!-- Required meta tags -->
 	<meta charset="utf-8" />
-	<meta
-	    name="viewport"
-	    content="width=device-width, initial-scale=1, shrink-to-fit=no"
-	    />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta property="og:title" content="Personal Portfolio" />
 	<meta property="og:description" content="My Personal Portfolio" />
 	<meta property="og:url" content="{{ url }}" />
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" />
 	<link
-	    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-	    rel="stylesheet"
-	    />
+		href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+		rel="stylesheet" />
 
 	<link lang="sass" rel="stylesheet" href="/static/styles/main.css" />
-	<link rel="icon" href="/static/img/favicon.ico" type="image/x-icon" />
+	<link rel="icon" href="/static/img/favicon.PNG" type="image/png" />
 	<title>{% block header %}{% endblock %}</title>
-    </head>
-    <header>
-	{% if username != "" %}
-	<a href="/user/">{{ username }}</a>
-	{% else %}
-	<a href="/user/login/">Login</a>
-	<a href="/user/register/">Register</a>
-	{% endif %}
-    </header>
-    <body>
-	<div class="profile">
-	    <div class="row">
-		<div class="column">
-		    <h2>Hi! I am</h2>
+</head>
+
+<body>
+	<header class="nav-bar">
+		{% if username != "" %}
+		<a href="/user/">{{ username }}</a>
+		{% else %}
+		<ul>
+			<li><a href="/user/login/">Login</a></li>
+			<li><a href="/user/register/">Register</a></li>
+			<li><a href="/user/modules/">Modules</a></li>
+		</ul>
+		<div class="nav-content">
+			{% endif %}
+
+			<a href="/">
+				<div class="nav-logo">
+					<img src="/static/img/tonetypelogo.png" />
+				</div>
+			</a>
 		</div>
-		<div class="column">
-		    <a href="/"><img src="/static/img/profile-pic.png" style="width: 275px; height: 225px" /></a>
-		</div>
-		
-	    </div>
-	</div>
-	{% block body %}{% endblock %}
-    </body>
+	</header>
+
+	{% block body %}
+	<h1>Piano!</h1>
+	{% endblock %}
+</body>
+
 </html>
