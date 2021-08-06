@@ -29,6 +29,7 @@ jobs:
           echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env &&
           echo "POSTGRES_HOST=${{ secrets.POSTGRES_HOST }}"         >> .env &&
           echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}"             >> .env &&
+          echo "SESSION_KEY=${{ secrets.SESSION_KEY }}"             >> .env &&
           cat .env
 
       - name: Test site endpoints
