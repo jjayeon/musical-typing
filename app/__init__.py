@@ -1,5 +1,13 @@
 import os
-from flask import Flask, render_template, request, session, redirect, url_for, make_response
+from flask import (
+    Flask,
+    render_template,
+    request,
+    session,
+    redirect,
+    url_for,
+    make_response,
+)
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
