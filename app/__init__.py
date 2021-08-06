@@ -53,9 +53,11 @@ def index():
         username = session["username"]
     return render_template("layout.html", username=username)
 
+
 @app.route("/play/")
 def modules():
     return render_template("modules.html", username=session["username"])
+
 
 @app.route("/user/")
 def user():
@@ -66,6 +68,7 @@ def user():
         "</form> "
         '<a href="/">home</a>'
     )
+
 
 @app.route("/logout/", methods=["POST"])
 def logout():
