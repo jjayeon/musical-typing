@@ -1,5 +1,3 @@
-console.log("Hello world!");
-
 Mousetrap.bind('a', function () { console.log("You pressed a!"); }, 'keydown');
 Mousetrap.bind('a', function () { console.log("You released a!"); }, 'keyup');
 
@@ -19,8 +17,19 @@ function loadJSON(callback) {
 loadJSON(function (response) {
     var data = JSON.parse(response);
 
-    var lines = [];
+    // load notes
+    var notes = {};
+    for (var key in data.keyTone) {
+        var note = new Audio("../static/notes/" + data.keyTone[key] + ".mp3");
+        notes[key] = note;
+    }
+    function playNote(audio) {
+        var clone = audio.cloneNode();
+        clone.play();
+    }
 
+    // load scroller lines
+    var lines = [];
     for (var i = 0; i < data.sequence.length; i += 10) {
         var line;
         if (i + 10 > data.sequence.length) {
@@ -28,7 +37,6 @@ loadJSON(function (response) {
         } else {
             line = data.sequence.substr(i, 10);
         }
-        console.log(line);
         var scrollerP = document.createElement("p");
         for (var j = 0; j < line.length; j++) {
             var charSpan = document.createElement("span");
@@ -36,5 +44,33 @@ loadJSON(function (response) {
             scrollerP.append(charSpan);
         }
         document.getElementById("scroller").append(scrollerP);
+        lines.push(line);
+    }
+
+    // key checking logic
+    function checkKey(row, column, key) {
+        if (key === lines[row][column]) {
+            playNote(notes[key]);
+            return true;
+        } else {
+            // play a nasty note
+            return false;
+        }
+    }
+
+    var row = 0;
+    var column = 0;
+
+    // bind keys
+    for (var key in notes) {
+        Mousetrap.bind(key, function (e, combo) {
+            if (checkKey(row, column, combo)) {
+                column++;
+                if (column === 10) {
+                    row++;
+                    column = 0;
+                }
+            }
+        })
     }
 });
