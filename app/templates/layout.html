@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
+<head>
 	<!-- Required meta tags -->
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -11,36 +11,37 @@
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" />
 	<link
-	    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-	    rel="stylesheet" />
+		href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+		rel="stylesheet" />
 
 	<link lang="sass" rel="stylesheet" href="/static/styles/main.css" />
 	<link rel="icon" href="/static/img/favicon.PNG" type="image/png" />
 	<title>{% block header %}{% endblock %}</title>
-    </head>
+	{% block script %}{% endblock %}
+</head>
 
-    <body>
+<body>
 	<header class="nav-bar">
-	    <ul>
-		<li><a href="/play/">Play!</a></li>
-		{% if username != "" %}
-		<li><a href="/user/">{{ username }}</a></li>
-		{% else %}
-		<li><a href="/user/login/">Login</a></li>
-		<li><a href="/user/register/">Register</a></li>
-		{% endif %}
-	    </ul>
-	    <div class="nav-content">
-		<a href="/">
-		    <div class="nav-logo">
-			<img src="/static/img/tonetypelogo.PNG" />
-		    </div>
-		</a>
-	    </div>
+		<ul>
+			<li><a href="/play/">Play!</a></li>
+			{% if username != "" %}
+			<li><a href="/user/">{{ username }}</a></li>
+			{% else %}
+			<li><a href="/user/login/">Login</a></li>
+			<li><a href="/user/register/">Register</a></li>
+			{% endif %}
+		</ul>
+		<div class="nav-content">
+			<a href="/">
+				<div class="nav-logo">
+					<img src="/static/img/tonetypelogo.png" />
+				</div>
+			</a>
+		</div>
 	</header>
 
 	{% block body %}
 	{% endblock %}
-    </body>
+</body>
 
 </html>

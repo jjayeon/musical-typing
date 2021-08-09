@@ -1,0 +1,24 @@
+{
+    "title": "Can Can",
+    "toneRange": [
+        "E4",
+        "E6"
+    ],
+    "key-tone": {
+        "a": "G4",
+        "s": "A4",
+        "d": "B4",
+        "f": "C5",
+        "r": "D5",
+        "t": "E5",
+        "y": "F5",
+        "u": "G5",
+        "j": "A5",
+        "k": "B5",
+        "l": "C6",
+        ";": "D6",
+        "i": "E6",
+        "e": "G#5"
+    },
+    "sequence": "sttytrryuk;kkjjkffkjrryytyttrryrdstyuytryrdsejkli;;"
+}

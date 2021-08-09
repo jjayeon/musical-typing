@@ -1,5 +1,21 @@
 {% extends "layout.html" %}
 {% block header %}ToneType{% endblock %}
+{% block script %}
+<script src="/static/mousetrap.min.js"></script>
+<script src="../static/index.js"></script>
+{% endblock %}
 {% block body %}
-<h1>Piano!</h1>
+
+<body>
+    <h1>Welcome to Tonetype!</h1>
+
+    <div id="scroller">
+
+    </div>
+    <div class="piano">
+
+    </div>
+</body>
+
+</html>
 {% endblock %}
