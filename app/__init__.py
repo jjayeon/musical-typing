@@ -55,7 +55,8 @@ class SongModel(db.Model):
 
 
 # game
-        
+
+
 @app.route("/")
 def index():
     username = ""
@@ -118,6 +119,7 @@ def admin():
 
 
 # user settings
+
 
 @app.route("/user/")
 def user():
