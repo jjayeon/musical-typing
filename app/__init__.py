@@ -1,4 +1,5 @@
 import os
+import json
 from flask import Flask, render_template, request, session, redirect, url_for
 
 
@@ -39,6 +40,22 @@ class UserModel(db.Model):
         return f"<User {self.username}>"
 
 
+class SongModel(db.Model):
+    __tablename__ = "songs"
+
+    name = db.Column(db.String(), primary_key=True)
+    data = db.Column(db.PickleType())
+
+    def __init__(self, name, data):
+        self.name = name
+        self.data = data
+
+    def __repr__(self):
+        return f"<Song {self.name}> {self.data}"
+
+
+# game
+        
 @app.route("/")
 def index():
     username = ""
@@ -55,18 +72,65 @@ def modules():
     return render_template("modules.html", username=username)
 
 
+@app.route("/play/<song_name>")
+def play(song_name):
+    username = ""
+    if "username" in session:
+        username = session["username"]
+    return render_template("play.html", username=username, song_name=song_name)
+
+
+@app.route("/api/<song_name>")
+def api(song_name):
+    song = SongModel.query.filter_by(name=song_name).first()
+    if song is None:
+        return None, 418
+    return song.data
+
+
+@app.route("/admin/", methods=("GET", "POST"))
+def admin():
+    if request.method == "GET":
+        username = ""
+        if "username" in session:
+            username = session["username"]
+        return render_template("admin.html", username=username)
+    else:
+        name = request.form.get("name")
+        info = request.form.get("json")
+        error = None
+        if not name:
+            error = "Please enter song name."
+        elif not info:
+            error = "Please enter song info."
+        else:
+            try:
+                json.loads(info)
+            except JSONDecodeError:
+                error = "Invalid JSON -- please check syntax."
+        if error is None:
+            song = SongModel(name, info)
+            db.session.add(song)
+            db.session.commit()
+            return "Song successfully added! info: <br>" + info
+        else:
+            return error + ' <br> <a href="/admin/">back</a>', 418
+
+
+# user settings
+
 @app.route("/user/")
 def user():
     return (
         "TODO: make user page "
-        '<form action="/logout/" method="post" target="_self"> '
+        '<form action="/user/logout/" method="post" target="_self"> '
         '<input type="submit" value="logout"> '
         "</form> "
         '<a href="/">home</a>'
     )
 
 
-@app.route("/logout/", methods=["POST"])
+@app.route("/user/logout/", methods=["POST"])
 def logout():
     if "username" in session:
         session.pop("username")
