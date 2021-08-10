@@ -41,8 +41,8 @@ echo "curling login POST ${URL}/user/login/"
 RESPONSE=$(eval $CURL_CMD $POST "${URL}/user/login/")
 check_route
 
-echo "curling logout POST ${URL}/logout/"
-RESPONSE=$(eval $CURL_CMD $POST "$URL/logout/")
+echo "curling logout POST ${URL}/user/logout/"
+RESPONSE=$(eval $CURL_CMD $POST "$URL/user/logout/")
 check_route
 
 docker-compose logs
