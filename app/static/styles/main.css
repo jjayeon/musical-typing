@@ -129,21 +129,26 @@ h1 {
   text-align: center;
 }
 
-#scroller {
-  position: relative;
+#scroller-box {
+  position: absolute;
+  left: 50%;
+  width: 200px;
+  margin-left: -100px;
   text-align: center;
   display: block;
   font-size: 20px;
+  line-height: 24px;
   color: #048BA8;
-  /* height: 150px; */
+  height: 250px; 
   overflow: hidden;
 }
 
-#scroller p {
-
+#scroller-content {
+  position: absolute;
+  width: 200px;
 }
 
-#scroller span {
+#scroller-box span {
   margin: 3px;
 }
 

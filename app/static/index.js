@@ -43,7 +43,7 @@ loadJSON(function (response) {
             charSpan.textContent = line[j];
             scrollerP.append(charSpan);
         }
-        document.getElementById("scroller").append(scrollerP);
+        document.getElementById("scroller-content").append(scrollerP);
         lines.push(line);
     }
 
@@ -52,7 +52,7 @@ loadJSON(function (response) {
         if (key === lines[row][column]) {
             playNote(notes[key]);
             // change color of typed letters
-            document.querySelector("#scroller p:nth-child(" + (row + 1) + ") span:nth-child(" + (column + 1) + ")").classList.add("typed");
+            document.querySelector("#scroller-content p:nth-child(" + (row + 1) + ") span:nth-child(" + (column + 1) + ")").classList.add("typed");
             return true;
         } else {
             // play a nasty note
@@ -63,6 +63,24 @@ loadJSON(function (response) {
     var row = 0;
     var column = 0;
 
+    // scrolling functionality
+    document.getElementById("scroller-content").style.top = "48px";
+    function scroll() {
+        var animation = setInterval(frame, 5);
+        var content = document.getElementById("scroller-content");
+        var pos = parseInt(content.style.top);
+        var goto = pos - 45;
+        function frame() {
+            if (pos <= goto) {
+                clearInterval(animation);
+            } else {
+                pos--;
+                content.style.top = pos + "px";
+            }
+
+        }
+    }
+
     // bind keys
     for (var key in notes) {
         Mousetrap.bind(key, function (e, combo) {
@@ -71,6 +89,7 @@ loadJSON(function (response) {
                 if (column === 10) {
                     row++;
                     column = 0;
+                    scroll();
                 }
             }
         })
