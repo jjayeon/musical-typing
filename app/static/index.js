@@ -51,6 +51,8 @@ loadJSON(function (response) {
     function checkKey(row, column, key) {
         if (key === lines[row][column]) {
             playNote(notes[key]);
+            // change color of typed letters
+            document.querySelector("#scroller p:nth-child(" + (row + 1) + ") span:nth-child(" + (column + 1) + ")").classList.add("typed");
             return true;
         } else {
             // play a nasty note
