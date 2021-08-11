@@ -64,12 +64,12 @@ loadJSON(function (response) {
     var column = 0;
 
     // scrolling functionality
-    document.getElementById("scroller-content").style.top = "48px";
+    document.getElementById("scroller-content").style.top = "40px";
     function scroll() {
         var animation = setInterval(frame, 5);
         var content = document.getElementById("scroller-content");
         var pos = parseInt(content.style.top);
-        var goto = pos - 45;
+        var goto = pos - 40;
         function frame() {
             if (pos <= goto) {
                 clearInterval(animation);
