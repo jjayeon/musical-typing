@@ -51,6 +51,8 @@ loadJSON(function (response) {
     function checkKey(row, column, key) {
         if (key === lines[row][column]) {
             playNote(notes[key]);
+            // scroll progress bar
+            document.getElementById("progress-bar").style.width = (100 * (row * lines[0].length + column + 1) / data.sequence.length) + "%";
             // change color of typed letters
             document.querySelector("#scroller-content p:nth-child(" + (row + 1) + ") span:nth-child(" + (column + 1) + ")").classList.add("typed");
             return true;
@@ -77,7 +79,6 @@ loadJSON(function (response) {
                 pos--;
                 content.style.top = pos + "px";
             }
-
         }
     }
 
