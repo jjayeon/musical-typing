@@ -107,7 +107,7 @@ def admin():
         else:
             try:
                 json.loads(info)
-            except JSONDecodeError:
+            except json.JSONDecodeError:
                 error = "Invalid JSON -- please check syntax."
         if error is None:
             song = SongModel(name, info)
