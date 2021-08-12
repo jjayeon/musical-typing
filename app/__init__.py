@@ -57,18 +57,19 @@ class SongModel(db.Model):
 # game
 
 
-@app.route("/")
+
 def index():
     if "username" not in session:
         session["username"] = ""
     return render_template("index.html", username=session["username"])
 
-
+@app.route("/")
 @app.route("/play/")
 def modules():
     if "username" not in session:
         session["username"] = ""
-    return render_template("modules.html", username=session["username"])
+    songs = [song.name for song in SongModel.query.all()]
+    return render_template("modules.html", username=session["username"], songs=songs)
 
 
 @app.route("/play/<song_name>")
