@@ -1,46 +1,27 @@
-Mousetrap.bind(
-    "a",
-    function () {
-        console.log("You pressed a!");
-    },
-    "keydown"
-);
-Mousetrap.bind(
-    "a",
-    function () {
-        console.log("You released a!");
-    },
-    "keyup"
-);
-
-// load local json file
-function loadJSON(callback) {
-    var xobj = new XMLHttpRequest();
-    var song_name = document.getElementById("song_name").innerHTML;
-    console.log(song_name);
-
-    xobj.overrideMimeType("application/json");
-    xobj.open("GET", "/api/" + song_name, true);
-    xobj.onreadystatechange = function () {
-        if (xobj.readyState == 4 && xobj.status == "200") {
-            callback(xobj.responseText);
-        }
-    };
-    xobj.send(null);
-}
-
 window.onload = function () {
+    // load local json file
+    function loadJSON(callback) {
+        var xobj = new XMLHttpRequest();
+        xobj.overrideMimeType("application/json");
+        xobj.open('GET', '../static/song-data.json', true);
+        xobj.onreadystatechange = function () {
+            if (xobj.readyState == 4 && xobj.status == "200") {
+                callback(xobj.responseText);
+            }
+        };
+        xobj.send(null);
+    }
+
     loadJSON(function (response) {
         var data = JSON.parse(response);
 
         // load notes
         var notes = {};
         for (var key in data.keyTone) {
-            var note = new Audio(
-                "../static/notes/" + data.keyTone[key] + ".mp3"
-            );
+            var note = new Audio("../static/notes/" + data.keyTone[key] + ".mp3");
             notes[key] = note;
         }
+        var wrong = new Audio("../static/notes/wrong.mp3");
         function playNote(audio) {
             var clone = audio.cloneNode();
             clone.play();
@@ -61,7 +42,7 @@ window.onload = function () {
                 charSpan.textContent = line[j];
                 scrollerP.append(charSpan);
             }
-            document.getElementById("scroller").append(scrollerP);
+            document.getElementById("scroller-content").append(scrollerP);
             lines.push(line);
         }
 
@@ -69,15 +50,37 @@ window.onload = function () {
         function checkKey(row, column, key) {
             if (key === lines[row][column]) {
                 playNote(notes[key]);
+                // scroll progress bar
+                document.getElementById("progress-bar").style.width = (100 * (row * lines[0].length + column + 1) / data.sequence.length) + "%";
+                // change color of typed letters
+                document.querySelector("#scroller-content p:nth-child(" + (row + 1) + ") span:nth-child(" + (column + 1) + ")").classList.add("typed");
                 return true;
             } else {
                 // play a nasty note
+                playNote(wrong);
                 return false;
             }
         }
 
         var row = 0;
         var column = 0;
+
+        // scrolling functionality
+        document.getElementById("scroller-content").style.top = "40px";
+        function scroll() {
+            var animation = setInterval(frame, 5);
+            var content = document.getElementById("scroller-content");
+            var pos = parseInt(content.style.top);
+            var goto = pos - 40;
+            function frame() {
+                if (pos <= goto) {
+                    clearInterval(animation);
+                } else {
+                    pos--;
+                    content.style.top = pos + "px";
+                }
+            }
+        }
 
         // bind keys
         for (var key in notes) {
@@ -87,9 +90,10 @@ window.onload = function () {
                     if (column === 10) {
                         row++;
                         column = 0;
+                        scroll();
                     }
                 }
-            });
+            })
         }
     });
-};
+}
