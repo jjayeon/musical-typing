@@ -56,6 +56,7 @@ class SongModel(db.Model):
 
 # game
 
+
 @app.route("/")
 @app.route("/play/")
 def index():
