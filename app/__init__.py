@@ -57,11 +57,11 @@ class SongModel(db.Model):
 # game
 
 
-
 def index():
     if "username" not in session:
         session["username"] = ""
     return render_template("index.html", username=session["username"])
+
 
 @app.route("/")
 @app.route("/play/")
