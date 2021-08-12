@@ -75,7 +75,9 @@ def modules():
 def play(song_name):
     if "username" not in session:
         session["username"] = ""
-    return render_template("play.html", username=session["username"], song_name=song_name)
+    return render_template(
+        "play.html", username=session["username"], song_name=song_name
+    )
 
 
 @app.route("/api/<song_name>")
@@ -109,21 +111,23 @@ def admin():
                 return redirect(url_for("admin"))
             else:
                 return error + ' <br> <a href="/admin/">back</a>', 418
-            
+
         elif request.form.get("del") is not None:
-            songs = [SongModel.query.filter_by(name=name).first()
-                    for name in request.form if request.form[name] == "on"]
+            songs = [
+                SongModel.query.filter_by(name=name).first()
+                for name in request.form
+                if request.form[name] == "on"
+            ]
             for song in songs:
                 db.session.delete(song)
             db.session.commit()
             return redirect(url_for("admin"))
-        
+
     else:
         if "username" not in session:
             session["username"] = ""
-        songs = [ song.name for song in SongModel.query.all() ]
+        songs = [song.name for song in SongModel.query.all()]
         return render_template("admin.html", username=session["username"], songs=songs)
-
 
 
 # user settings
@@ -171,7 +175,9 @@ def register():
     else:
         if "username" not in session:
             session["username"] = ""
-        return render_template("login.html", mode="register", username=session["username"])
+        return render_template(
+            "login.html", mode="register", username=session["username"]
+        )
 
 
 @app.route("/user/login/", methods=("GET", "POST"))
