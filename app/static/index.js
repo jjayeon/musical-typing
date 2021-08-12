@@ -4,7 +4,8 @@ window.onload = function () {
         var xobj = new XMLHttpRequest();
         xobj.overrideMimeType("application/json");
         var song_name = document.getElementById("song_name");
-        xobj.open('GET', '/api'+song_name, true);
+        // xobj.open('GET', '/api' + song_name, true);
+        xobj.open('GET', '../static/song-data.json', true);
         xobj.onreadystatechange = function () {
             if (xobj.readyState == 4 && xobj.status == "200") {
                 callback(xobj.responseText);
