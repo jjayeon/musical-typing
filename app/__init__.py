@@ -59,26 +59,23 @@ class SongModel(db.Model):
 
 @app.route("/")
 def index():
-    username = ""
-    if "username" in session:
-        username = session["username"]
-    return render_template("index.html", username=username)
+    if "username" not in session:
+        session["username"] = ""
+    return render_template("index.html", username=session["username"])
 
 
 @app.route("/play/")
 def modules():
-    username = ""
-    if "username" in session:
-        username = session["username"]
-    return render_template("modules.html", username=username)
+    if "username" not in session:
+        session["username"] = ""
+    return render_template("modules.html", username=session["username"])
 
 
 @app.route("/play/<song_name>")
 def play(song_name):
-    username = ""
-    if "username" in session:
-        username = session["username"]
-    return render_template("play.html", username=username, song_name=song_name)
+    if "username" not in session:
+        session["username"] = ""
+    return render_template("play.html", username=session["username"], song_name=song_name)
 
 
 @app.route("/api/<song_name>")
@@ -91,12 +88,7 @@ def api(song_name):
 
 @app.route("/admin/", methods=("GET", "POST"))
 def admin():
-    if request.method == "GET":
-        username = ""
-        if "username" in session:
-            username = session["username"]
-        return render_template("admin.html", username=username)
-    else:
+    if request.method == "POST":
         name = request.form.get("name")
         info = request.form.get("json")
         error = None
@@ -116,6 +108,11 @@ def admin():
             return "Song successfully added! info: <br>" + info
         else:
             return error + ' <br> <a href="/admin/">back</a>', 418
+    else:
+        if "username" not in session:
+            session["username"] = ""
+        return render_template("admin.html", username=session["username"])
+
 
 
 # user settings
@@ -134,8 +131,7 @@ def user():
 
 @app.route("/user/logout/", methods=["POST"])
 def logout():
-    if "username" in session:
-        session.pop("username")
+    session["username"] = ""
     return redirect(url_for("index"), code=302)
 
 
@@ -162,10 +158,9 @@ def register():
         else:
             return error + ' <br> <a href="/user/register/">back</a>', 418
     else:
-        username = ""
-        if "username" in session:
-            username = session["username"]
-        return render_template("login.html", mode="register", username=username)
+        if "username" not in session:
+            session["username"] = ""
+        return render_template("login.html", mode="register", username=session["username"])
 
 
 @app.route("/user/login/", methods=("GET", "POST"))
@@ -188,7 +183,6 @@ def login():
         else:
             return error + ' <br> <a href="/user/login">back</a>', 418
     else:
-        username = ""
-        if "username" in session:
-            username = session["username"]
-        return render_template("login.html", mode="login", username=username)
+        if "username" not in session:
+            session["username"] = ""
+        return render_template("login.html", mode="login", username=session["username"])
