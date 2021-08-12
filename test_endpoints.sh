@@ -7,14 +7,16 @@ else
     URL=$1
 fi
 
-ROUTES=("/" "/play/" "/user/" "/user/register/" "/user/login/")
-EXIT=0
+GET_ROUTES=("/" "/play/" "/user/" "/user/register/" "/user/login/")
+POST_ROUTES=("/user/register/" "/user/login/" "/admin/" "/user/logout/")
 
 CURL_CMD='curl -s -o /dev/null -w "%{http_code}"'
 
 HEAD="-I"
 
-POST='-X POST -d "username=JonSmith&password=pw123"'
+POST='-X POST -d "username=admin&password=admin&name=songname&info={}"'
+
+EXIT=0
 
 check_route () {
     if [[ $RESPONSE -eq 200 || $RESPONSE -eq 418 || $RESPONSE -eq 302 ]]
@@ -26,25 +28,25 @@ check_route () {
     fi
 }
 
-for ROUTE in ${ROUTES[@]}; do
+echo "GET requests"
+for ROUTE in ${GET_ROUTES[@]}; do
     REQUEST=$URL$ROUTE
     echo "curling $REQUEST"
     RESPONSE=$(eval $CURL_CMD $HEAD $REQUEST)
     check_route
 done
 
-echo "curling register POST ${URL}/user/register/"
-RESPONSE=$(eval $CURL_CMD $POST "${URL}/user/register/")
-check_route
+echo "POST requests"
+for ROUTE in ${POST_ROUTES[@]}; do
+    REQUEST=$URL$ROUTE
+    echo "curling $REQUEST"
+    RESPONSE=$(eval $CURL_CMD $POST $REQUEST)
+    check_route
+done
 
-echo "curling login POST ${URL}/user/login/"
-RESPONSE=$(eval $CURL_CMD $POST "${URL}/user/login/")
-check_route
-
-echo "curling logout POST ${URL}/logout/"
-RESPONSE=$(eval $CURL_CMD $POST "$URL/logout/")
-check_route
-
-docker-compose logs
+if [[ $EXIT -eq 1 ]]
+then
+    docker-compose logs
+fi
 
 exit $EXIT
