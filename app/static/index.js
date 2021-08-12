@@ -1,6 +1,3 @@
-Mousetrap.bind('a', function () { console.log("You pressed a!"); }, 'keydown');
-Mousetrap.bind('a', function () { console.log("You released a!"); }, 'keyup');
-
 // load local json file
 function loadJSON(callback) {
     var xobj = new XMLHttpRequest();
@@ -23,6 +20,7 @@ loadJSON(function (response) {
         var note = new Audio("../static/notes/" + data.keyTone[key] + ".mp3");
         notes[key] = note;
     }
+    var wrong = new Audio("../static/notes/wrong.mp3");
     function playNote(audio) {
         var clone = audio.cloneNode();
         clone.play();
@@ -58,6 +56,7 @@ loadJSON(function (response) {
             return true;
         } else {
             // play a nasty note
+            playNote(wrong);
             return false;
         }
     }
