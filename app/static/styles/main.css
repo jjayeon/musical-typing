@@ -41,13 +41,13 @@
     padding-right: 0px;
 }
 
-ul {
+header ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-li {
+header ul li {
   float: right;
 }
 
@@ -119,13 +119,12 @@ input[type="submit"] {
     float: none;
 }
 
-input {
-  text-align: right;
+#login_form input {
   align-self: auto;
   float: right;
 }
 
-h1 {
+h1, h2 {
   text-align: center;
 }
 

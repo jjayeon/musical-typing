@@ -89,29 +89,40 @@ def api(song_name):
 @app.route("/admin/", methods=("GET", "POST"))
 def admin():
     if request.method == "POST":
-        name = request.form.get("name")
-        info = request.form.get("json")
-        error = None
-        if not name:
-            error = "Please enter song name."
-        elif not info:
-            error = "Please enter song info."
-        else:
-            try:
-                json.loads(info)
-            except json.JSONDecodeError:
-                error = "Invalid JSON -- please check syntax."
-        if error is None:
-            song = SongModel(name, info)
-            db.session.add(song)
+        if request.form.get("add") is not None:
+            name = request.form.get("name")
+            info = request.form.get("json")
+            error = None
+            if not name:
+                error = "Please enter song name."
+            elif not info:
+                error = "Please enter song info."
+            else:
+                try:
+                    json.loads(info)
+                except json.JSONDecodeError:
+                    error = "Invalid JSON -- please check syntax."
+            if error is None:
+                song = SongModel(name, info)
+                db.session.add(song)
+                db.session.commit()
+                return redirect(url_for("admin"))
+            else:
+                return error + ' <br> <a href="/admin/">back</a>', 418
+            
+        elif request.form.get("del") is not None:
+            songs = [SongModel.query.filter_by(name=name).first()
+                    for name in request.form if request.form[name] == "on"]
+            for song in songs:
+                db.session.delete(song)
             db.session.commit()
-            return "Song successfully added! info: <br>" + info
-        else:
-            return error + ' <br> <a href="/admin/">back</a>', 418
+            return redirect(url_for("admin"))
+        
     else:
         if "username" not in session:
             session["username"] = ""
-        return render_template("admin.html", username=session["username"])
+        songs = [ song.name for song in SongModel.query.all() ]
+        return render_template("admin.html", username=session["username"], songs=songs)
 
 
 
@@ -132,7 +143,7 @@ def user():
 @app.route("/user/logout/", methods=["POST"])
 def logout():
     session["username"] = ""
-    return redirect(url_for("index"), code=302)
+    return redirect(url_for("index"))
 
 
 @app.route("/user/register/", methods=("GET", "POST"))
@@ -154,7 +165,7 @@ def register():
             db.session.add(new_user)
             db.session.commit()
             session["username"] = username
-            return redirect(url_for("index"), code=302)
+            return redirect(url_for("index"))
         else:
             return error + ' <br> <a href="/user/register/">back</a>', 418
     else:
@@ -179,7 +190,7 @@ def login():
 
         if error is None:
             session["username"] = username
-            return redirect(url_for("index"), code=302)
+            return redirect(url_for("index"))
         else:
             return error + ' <br> <a href="/user/login">back</a>', 418
     else:
