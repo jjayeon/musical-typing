@@ -1,0 +1,175 @@
+/*fonts*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap');
+
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/*navbar*/
+.nav-bar {
+    width: 100%;
+    display: inline-block;
+    background-color: #304058;
+    font-weight: 700 !important;
+}
+
+.nav-content .logo-touch-target {
+    display: inline-flex;
+    height: 60%;
+    width: 350px;
+}
+
+.nav-content .nav-logo {
+    margin: auto;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-logo img {
+    width: 200px;
+}
+
+.nav-content nav {
+    display: block;
+    width: 100%;
+    text-align: right;
+    padding-top: 0px;
+    padding-right: 0px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  float: right;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/*modules page*/
+.prompt {
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+}
+
+.modules {
+  font-family: 'Montserrat', sans-serif;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+td {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.module {
+  position: relative;
+  vertical-align: middle;
+  background: rgba(4, 139, 168, 0.13);
+  width: 330px;
+  margin-bottom: -10px;
+}
+
+.module img, .song img {
+  position: absolute;
+  margin-left: -10px;
+}
+
+.module h3, .song h4 {
+  padding-left: 30px;
+}
+
+.song {
+  position: relative;
+  vertical-align: middle;
+  background: rgba(4, 139, 168, 0.13);
+  width: 300px;
+  margin-left: 30px;
+  margin-bottom: -10px;
+}
+
+form {
+  margin: 0 auto;
+  width: 300px;
+}
+
+input, label {
+  margin-bottom: 10px;
+  float: left;
+}
+
+input[type="submit"] {
+    float: none;
+}
+
+input {
+  text-align: right;
+  align-self: auto;
+  float: right;
+}
+
+h1 {
+  text-align: center;
+}
+
+#scroller-box {
+  position: absolute;
+  left: 50%;
+  width: 200px;
+  margin-left: -100px;
+  text-align: center;
+  display: block;
+  font-size: 20px;
+  line-height: 1;
+  color: #048BA8;
+  height: 160px; 
+  overflow: hidden;
+}
+
+#scroller-content {
+  position: absolute;
+  width: 200px;
+}
+
+#scroller-box span {
+  margin: 3px;
+}
+
+.typed {
+  color: #D9EEF2;
+}
+
+#progress-box {
+  border: 1px solid rgb(185, 185, 185);
+  border-radius: 10px;
+  width: 20%;
+  height: 20px;
+  position: absolute;
+  left: 40%;
+  top: 280px;
+  overflow: hidden;
+}
+
+#progress-bar {
+  position: absolute;
+  background-color: #99C24D;
+  width: 0%;
+  height: 20px;
+}
