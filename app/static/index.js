@@ -63,9 +63,7 @@ window.onload = function () {
             document.getElementById(data.keyTone[key]).append(label);
         }
         var wrong = new Audio("../static/notes/wrong.mp3");
-        wrong.volume = 0.01;
         function playNote(audio) {
-            console.log(audio.volume);
             var clone = audio.cloneNode();
             clone.play();
         }
