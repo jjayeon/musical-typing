@@ -8,3 +8,4 @@ python3-module/
 env/
 flask.sqlite
 *~
+*.env
