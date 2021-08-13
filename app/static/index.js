@@ -29,7 +29,7 @@ window.onload = function () {
 
             key.classList.add("white");
             key.setAttribute("id", availableNotes[i]);
-            document.getElementById("piano").prepend(key);
+            document.getElementById("piano").append(key);
 
             // add black keys
             if (availableNotes[i][0] !== "e" && availableNotes[i][0] != "b" && availableNotes[i + 1] !== data.toneRange[1]) {
@@ -45,8 +45,11 @@ window.onload = function () {
             }
         }
 
-        // override default key sizes
+        // move black key later to top
+        var blackKeys = document.getElementById("black-keys");
+        document.getElementById("piano").append(blackKeys);
 
+        // TODO: override default key sizes
 
         // load audio
         var notes = {};
