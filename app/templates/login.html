@@ -2,7 +2,7 @@
 {% block header %}{{ mode|capitalize }}{% endblock %}
 {% block body %}
 <h1>{{ mode|capitalize }}</h1>
-<form action="/user/{{ mode }}/" method="post" target="_self">
+<form id="login_form" action="/user/{{ mode }}/" method="post" target="_self">
     <label for="username">Username:</label>
     <input id="username" name="username" type="text" /><br>
     <label for="password">Password:</label>

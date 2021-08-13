@@ -58,27 +58,21 @@ class SongModel(db.Model):
 
 
 @app.route("/")
-def index():
-    username = ""
-    if "username" in session:
-        username = session["username"]
-    return render_template("index.html", username=username)
-
-
 @app.route("/play/")
-def modules():
-    username = ""
-    if "username" in session:
-        username = session["username"]
-    return render_template("modules.html", username=username)
+def index():
+    if "username" not in session:
+        session["username"] = ""
+    songs = [song.name for song in SongModel.query.all()]
+    return render_template("modules.html", username=session["username"], songs=songs)
 
 
 @app.route("/play/<song_name>")
 def play(song_name):
-    username = ""
-    if "username" in session:
-        username = session["username"]
-    return render_template("play.html", username=username, song_name=song_name)
+    if "username" not in session:
+        session["username"] = ""
+    return render_template(
+        "play.html", username=session["username"], song_name=song_name
+    )
 
 
 @app.route("/api/<song_name>")
@@ -91,31 +85,44 @@ def api(song_name):
 
 @app.route("/admin/", methods=("GET", "POST"))
 def admin():
-    if request.method == "GET":
-        username = ""
-        if "username" in session:
-            username = session["username"]
-        return render_template("admin.html", username=username)
-    else:
-        name = request.form.get("name")
-        info = request.form.get("json")
-        error = None
-        if not name:
-            error = "Please enter song name."
-        elif not info:
-            error = "Please enter song info."
-        else:
-            try:
-                json.loads(info)
-            except json.JSONDecodeError:
-                error = "Invalid JSON -- please check syntax."
-        if error is None:
-            song = SongModel(name, info)
-            db.session.add(song)
+    if request.method == "POST":
+        if request.form.get("add") is not None:
+            name = request.form.get("name")
+            info = request.form.get("json")
+            error = None
+            if not name:
+                error = "Please enter song name."
+            elif not info:
+                error = "Please enter song info."
+            else:
+                try:
+                    json.loads(info)
+                except json.JSONDecodeError:
+                    error = "Invalid JSON -- please check syntax."
+            if error is None:
+                song = SongModel(name, info)
+                db.session.add(song)
+                db.session.commit()
+                return redirect(url_for("admin"))
+            else:
+                return error + ' <br> <a href="/admin/">back</a>', 418
+
+        elif request.form.get("del") is not None:
+            songs = [
+                SongModel.query.filter_by(name=name).first()
+                for name in request.form
+                if request.form[name] == "on"
+            ]
+            for song in songs:
+                db.session.delete(song)
             db.session.commit()
-            return "Song successfully added! info: <br>" + info
-        else:
-            return error + ' <br> <a href="/admin/">back</a>', 418
+            return redirect(url_for("admin"))
+
+    else:
+        if "username" not in session:
+            session["username"] = ""
+        songs = [song.name for song in SongModel.query.all()]
+        return render_template("admin.html", username=session["username"], songs=songs)
 
 
 # user settings
@@ -134,9 +141,8 @@ def user():
 
 @app.route("/user/logout/", methods=["POST"])
 def logout():
-    if "username" in session:
-        session.pop("username")
-    return redirect(url_for("index"), code=302)
+    session["username"] = ""
+    return redirect(url_for("index"))
 
 
 @app.route("/user/register/", methods=("GET", "POST"))
@@ -158,14 +164,15 @@ def register():
             db.session.add(new_user)
             db.session.commit()
             session["username"] = username
-            return redirect(url_for("index"), code=302)
+            return redirect(url_for("index"))
         else:
             return error + ' <br> <a href="/user/register/">back</a>', 418
     else:
-        username = ""
-        if "username" in session:
-            username = session["username"]
-        return render_template("login.html", mode="register", username=username)
+        if "username" not in session:
+            session["username"] = ""
+        return render_template(
+            "login.html", mode="register", username=session["username"]
+        )
 
 
 @app.route("/user/login/", methods=("GET", "POST"))
@@ -184,11 +191,10 @@ def login():
 
         if error is None:
             session["username"] = username
-            return redirect(url_for("index"), code=302)
+            return redirect(url_for("index"))
         else:
             return error + ' <br> <a href="/user/login">back</a>', 418
     else:
-        username = ""
-        if "username" in session:
-            username = session["username"]
-        return render_template("login.html", mode="login", username=username)
+        if "username" not in session:
+            session["username"] = ""
+        return render_template("login.html", mode="login", username=session["username"])
