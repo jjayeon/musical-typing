@@ -95,6 +95,9 @@ window.onload = function () {
                 document.getElementById("progress-bar").style.width = (100 * (row * lines[0].length + column + 1) / data.sequence.length) + "%";
                 // change color of typed letters
                 document.querySelector("#scroller-content p:nth-child(" + (row + 1) + ") span:nth-child(" + (column + 1) + ")").classList.add("typed");
+
+                document.getElementById(data.keyTone[key]).classList.add("pressed");
+
                 return true;
             } else {
                 // play a nasty note
@@ -135,6 +138,10 @@ window.onload = function () {
                     }
                 }
             })
+
+            Mousetrap.bind(key, function (e, combo) {
+                document.getElementById(data.keyTone[combo]).classList.remove("pressed");
+            }, "keyup");
         }
     }); // end callback of loadJSON()
 }
