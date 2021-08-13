@@ -4,14 +4,25 @@
 
 {% if username == "admin" %}
 
-<h1>Submit Song</h1>
+<h1>Admin</h1>
+<form id="admin_form" action="/admin/" method="post" target="_self">
+    <h2>Manage Songs</h2>
+    <ul>
+	{% for song in songs %}
+	<li>
+	    <p>{{ song }}<input type="checkbox" id="{{ song }}" name="{{ song }}"></p>
+	</li>
+	{% endfor %}
+    </ul>
+    <input type="submit" name="del" value="delete selected">
 
-<form id="song_form" action="/admin/" method="post" target="_self">
-    <label for="name">Song name:</label>
-    <input id="name" name="name" type="text" />
-    <label for="json">JSON info:</label>
-    <textarea id="json" name="json" form="song_form"></textarea>
-    <input type="submit" value="submit">
+    <h2>Submit New Song</h2>
+
+    <input id="name" name="name" type="text" placeholder="Song name"/>
+    
+    <textarea id="json" name="json" form="admin_form" placeholder="JSON info"></textarea>
+    
+    <input type="submit" name="add" value="add new song">
 </form>
 
 {% else %}

@@ -14,7 +14,7 @@ CURL_CMD='curl -s -o /dev/null -w "%{http_code}"'
 
 HEAD="-I"
 
-POST='-X POST -d "username=admin&password=admin&name=songname&info={}"'
+POST='-X POST -d "username=admin&password=admin&name=songname&info={}&add=a"'
 
 EXIT=0
 
