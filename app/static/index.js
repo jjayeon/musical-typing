@@ -29,7 +29,7 @@ window.onload = function () {
 
             key.classList.add("white");
             key.setAttribute("id", availableNotes[i]);
-            document.getElementById("piano").prepend(key);
+            document.getElementById("piano").append(key);
 
             // add black keys
             if (availableNotes[i][0] !== "e" && availableNotes[i][0] != "b" && availableNotes[i + 1] !== data.toneRange[1]) {
@@ -45,8 +45,11 @@ window.onload = function () {
             }
         }
 
-        // override default key sizes
+        // move black key later to top
+        var blackKeys = document.getElementById("black-keys");
+        document.getElementById("piano").append(blackKeys);
 
+        // TODO: override default key sizes
 
         // load audio
         var notes = {};
@@ -95,6 +98,9 @@ window.onload = function () {
                 document.getElementById("progress-bar").style.width = (100 * (row * lines[0].length + column + 1) / data.sequence.length) + "%";
                 // change color of typed letters
                 document.querySelector("#scroller-content p:nth-child(" + (row + 1) + ") span:nth-child(" + (column + 1) + ")").classList.add("typed");
+
+                document.getElementById(data.keyTone[key]).classList.add("pressed");
+
                 return true;
             } else {
                 // play a nasty note
@@ -135,6 +141,10 @@ window.onload = function () {
                     }
                 }
             })
+
+            Mousetrap.bind(key, function (e, combo) {
+                document.getElementById(data.keyTone[combo]).classList.remove("pressed");
+            }, "keyup");
         }
     }); // end callback of loadJSON()
 }

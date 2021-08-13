@@ -145,6 +145,7 @@ h1 {
   height: 60%;
   width: 25px;
   border-radius: 3px;
+  border: 1px solid black;
 }
 
 .label {
@@ -162,23 +163,7 @@ h1 {
   width: 25px;
   font-size: 15px;
 }
-/* 
-.black:nth-child(1) {
-  left: 22px;
-}
 
-.black:nth-child(2) {
-  left: 54px;
+.pressed {
+  background-color: #99C24D;
 }
-
-.black:nth-child(3) {
-  left: 118px;
-}
-
-.black:nth-child(4) {
-  left: 150px;
-}
-
-.black:nth-child(5) {
-  left: 182px;
-} */
