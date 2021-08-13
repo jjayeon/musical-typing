@@ -162,23 +162,7 @@ h1 {
   width: 25px;
   font-size: 15px;
 }
-/* 
-.black:nth-child(1) {
-  left: 22px;
-}
 
-.black:nth-child(2) {
-  left: 54px;
+.pressed {
+  color: #99C24D;
 }
-
-.black:nth-child(3) {
-  left: 118px;
-}
-
-.black:nth-child(4) {
-  left: 150px;
-}
-
-.black:nth-child(5) {
-  left: 182px;
-} */
