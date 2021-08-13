@@ -3,8 +3,9 @@ window.onload = function () {
     function loadJSON(callback) {
         var xobj = new XMLHttpRequest();
         xobj.overrideMimeType("application/json");
-        var song_name = document.getElementById("song_name").innerHTML;
-        xobj.open('GET', '/api/'+song_name, true);
+        var song_name = document.getElementById("song_name");
+        // xobj.open('GET', '/api' + song_name, true);
+        xobj.open('GET', '../static/song-data.json', true);
         xobj.onreadystatechange = function () {
             if (xobj.readyState == 4 && xobj.status == "200") {
                 callback(xobj.responseText);
@@ -16,11 +17,50 @@ window.onload = function () {
     loadJSON(function (response) {
         var data = JSON.parse(response);
 
-        // load notes
+        // piano
+        var whiteKeyWidth = 40;
+        var blackKeyWidth = 25;
+        var availableNotes = ["c3", "d3", "e3", "f3", "g3", "a3", "b3",
+            "c4", "d4", "e4", "f4", "g4", "a4", "b4",
+            "c5", "d5", "e5", "f5", "g5", "a5", "b5", "c6"]
+
+        for (var i = availableNotes.indexOf(data.toneRange[0]); availableNotes[i] !== data.toneRange[1]; i++) {
+            var key = document.createElement("div");
+
+            key.classList.add("white");
+            key.setAttribute("id", availableNotes[i]);
+            document.getElementById("piano").prepend(key);
+
+            // add black keys
+            if (availableNotes[i][0] !== "e" && availableNotes[i][0] != "b" && availableNotes[i + 1] !== data.toneRange[1]) {
+                var noteName = availableNotes[i][0] + "-" + availableNotes[i][1];
+
+                var key = document.createElement("div");
+
+                key.classList.add("black");
+                key.setAttribute("id", noteName);
+
+                document.getElementById("black-keys").append(key);
+                key.style.left = ((i - availableNotes.indexOf(data.toneRange[0]) + 1) * (whiteKeyWidth + 2) - (blackKeyWidth / 2)) + "px";
+            }
+        }
+
+        // override default key sizes
+
+
+        // load audio
         var notes = {};
         for (var key in data.keyTone) {
             var note = new Audio("../static/notes/" + data.keyTone[key] + ".mp3");
             notes[key] = note;
+
+            // add key labels
+            var label = document.createElement("p");
+            label.classList.add("label");
+            label.innerHTML = key;
+
+            console.log(data.keyTone[key]);
+            document.getElementById(data.keyTone[key]).append(label);
         }
         var wrong = new Audio("../static/notes/wrong.mp3");
         function playNote(audio) {
@@ -96,5 +136,5 @@ window.onload = function () {
                 }
             })
         }
-    });
+    }); // end callback of loadJSON()
 }

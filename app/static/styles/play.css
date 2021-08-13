@@ -5,6 +5,10 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+body {
+  margin: 0;
+}
+
 /*navbar*/
 .nav-bar {
     width: 100%;
@@ -14,7 +18,7 @@
 }
 
 .nav-content .logo-touch-target {
-    display: inline-flex;
+    display: inline-block;
     height: 60%;
     width: 350px;
 }
@@ -57,72 +61,6 @@ li a {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-}
-
-/*modules page*/
-.prompt {
-  font-family: 'Montserrat', sans-serif;
-  text-align: center;
-}
-
-.modules {
-  font-family: 'Montserrat', sans-serif;
-}
-
-table {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-td {
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-.module {
-  position: relative;
-  vertical-align: middle;
-  background: rgba(4, 139, 168, 0.13);
-  width: 330px;
-  margin-bottom: -10px;
-}
-
-.module img, .song img {
-  position: absolute;
-  margin-left: -10px;
-}
-
-.module h3, .song h4 {
-  padding-left: 30px;
-}
-
-.song {
-  position: relative;
-  vertical-align: middle;
-  background: rgba(4, 139, 168, 0.13);
-  width: 300px;
-  margin-left: 30px;
-  margin-bottom: -10px;
-}
-
-form {
-  margin: 0 auto;
-  width: 300px;
-}
-
-input, label {
-  margin-bottom: 10px;
-  float: left;
-}
-
-input[type="submit"] {
-    float: none;
-}
-
-input {
-  text-align: right;
-  align-self: auto;
-  float: right;
 }
 
 h1 {
@@ -173,3 +111,74 @@ h1 {
   width: 0%;
   height: 20px;
 }
+
+#piano {
+  position: relative;
+  display: inline-block;
+  height: 130px;
+  top: 260px;
+  left: 50%;
+}
+
+.white {
+  border: 1px solid black;
+  display: inline-block;
+  height: 100%;
+  width: 40px;
+  position: relative;
+  left: -50%;
+  border-radius: 3px;
+  margin: 0px;
+  float: left;
+}
+
+#black-keys {
+  position: absolute;
+  height: 100%;
+  left: -50%;
+}
+
+.black {
+  position: absolute;
+  display: inline-block;
+  background-color: black;
+  height: 60%;
+  width: 25px;
+  border-radius: 3px;
+}
+
+.label {
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: 40px;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+#black-keys .label {
+  color: white;
+  width: 25px;
+  font-size: 15px;
+}
+/* 
+.black:nth-child(1) {
+  left: 22px;
+}
+
+.black:nth-child(2) {
+  left: 54px;
+}
+
+.black:nth-child(3) {
+  left: 118px;
+}
+
+.black:nth-child(4) {
+  left: 150px;
+}
+
+.black:nth-child(5) {
+  left: 182px;
+} */

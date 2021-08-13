@@ -14,7 +14,7 @@
 }
 
 .nav-content .logo-touch-target {
-    display: inline-flex;
+    display: inline-block;
     height: 60%;
     width: 350px;
 }
@@ -126,22 +126,4 @@ input[type="submit"] {
 
 h1, h2 {
   text-align: center;
-}
-
-#scroller {
-  position: relative;
-  text-align: center;
-  display: block;
-  font-size: 20px;
-  color: #048BA8;
-  /* height: 150px; */
-  overflow: hidden;
-}
-
-#scroller p {
-
-}
-
-#scroller span {
-  margin: 3px;
 }
