@@ -117,6 +117,8 @@ def admin():
                 db.session.delete(song)
             db.session.commit()
             return redirect(url_for("admin"))
+        else:
+            return "POST request with bad values.  Stop that!"
 
     else:
         if "username" not in session:
@@ -128,21 +130,52 @@ def admin():
 # user settings
 
 
-@app.route("/user/")
+@app.route("/user/", methods=("POST", "GET"))
 def user():
-    return (
-        "TODO: make user page "
-        '<form action="/user/logout/" method="post" target="_self"> '
-        '<input type="submit" value="logout"> '
-        "</form> "
-        '<a href="/">home</a>'
-    )
+    if request.method == "POST":
+        user = UserModel.query.filter_by(username=session["username"]).first()
+        if request.form.get("changepw") is not None:
+            old_pw = request.form.get("old_pw")
+            new_pw = request.form.get("new_pw")
+            error = None
+
+            if old_pw is None:
+                error = "Please enter your old password."
+            if new_pw is None:
+                error = "Please enter your new password."
+
+
+            if not check_password_hash(user.password, old_pw):
+                error = "Old password invalid; please try again."
+            if error is None:
+                user.password = generate_password_hash(new_pw)
+                db.session.commit()
+                return redirect(url_for("user"))
+            else:
+                return error + ' <br> <a href="/user/">back</a>', 418
+        
+        if request.form.get("logout") is not None:
+            session["username"] = ""
+            return redirect(url_for("index"))
+        
+        elif request.form.get("delete") is not None:
+            db.session.delete(user)
+            db.session.commit()
+            session["username"] = ""
+            return redirect(url_for("index"))
+        
+        else:
+            return "POST request with bad values.  Stop that!"
+    else:
+        if "username" not in session:
+            session["username"] = ""
+        return render_template("user.html", username=session["username"])
 
 
 @app.route("/user/logout/", methods=["POST"])
 def logout():
     session["username"] = ""
-    return redirect(url_for("index"))
+
 
 
 @app.route("/user/register/", methods=("GET", "POST"))

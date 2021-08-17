@@ -8,7 +8,7 @@ else
 fi
 
 GET_ROUTES=("/" "/play/" "/user/" "/user/register/" "/user/login/")
-POST_ROUTES=("/user/register/" "/user/login/" "/admin/" "/user/logout/")
+POST_ROUTES=("/user/register/" "/user/login/" "/admin/")
 
 CURL_CMD='curl -s -o /dev/null -w "%{http_code}"'
 

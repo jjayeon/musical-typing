@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block header %}ToneType|Account{% endblock %}
+{% block body %}
+
+<form action="/user/" method="post" target="_self">
+    
+    <label for="old_pw">Current Password:</label>
+    <input id="old_pw" name="old_pw" type="password">
+    <label for="old_pw">New Password:</label>
+    <input id="new_pw" name="new_pw" type="password">
+
+    <input name="changepw" type="submit" value="change password">
+    <hr>
+
+    <input name="logout" type="submit" value="logout">
+    <hr>
+    
+    <input name="delete" type="submit" value="delete account" onClick="return confirm('wait! are you sure?')">
+
+</form>
+
+
+
+{% endblock %} 
