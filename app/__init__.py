@@ -144,7 +144,6 @@ def user():
             if new_pw is None:
                 error = "Please enter your new password."
 
-
             if not check_password_hash(user.password, old_pw):
                 error = "Old password invalid; please try again."
             if error is None:
@@ -153,17 +152,17 @@ def user():
                 return redirect(url_for("user"))
             else:
                 return error + ' <br> <a href="/user/">back</a>', 418
-        
+
         if request.form.get("logout") is not None:
             session["username"] = ""
             return redirect(url_for("index"))
-        
+
         elif request.form.get("delete") is not None:
             db.session.delete(user)
             db.session.commit()
             session["username"] = ""
             return redirect(url_for("index"))
-        
+
         else:
             return "POST request with bad values.  Stop that!"
     else:
@@ -175,7 +174,6 @@ def user():
 @app.route("/user/logout/", methods=["POST"])
 def logout():
     session["username"] = ""
-
 
 
 @app.route("/user/register/", methods=("GET", "POST"))
