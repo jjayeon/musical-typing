@@ -14,7 +14,7 @@ CURL_CMD='curl -s -o /dev/null -w "%{http_code}"'
 
 HEAD="-I"
 
-POST='-X POST -d "username=admin&password=admin&name=songname&info={}&add=a"'
+POST='-X POST -d "username=jonsmith&password=pw123&name=songname&info={}&add=true&logout=true"'
 
 EXIT=0
 
@@ -46,7 +46,7 @@ done
 
 if [[ $EXIT -eq 1 ]]
 then
-    docker-compose logs
+    docker-compose logs | grep -i error -C 2
 fi
 
 exit $EXIT
