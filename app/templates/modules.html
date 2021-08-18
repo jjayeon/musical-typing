@@ -8,14 +8,16 @@
 <div class="modules">
     <table>
         <tr>
-	    {% for song in songs %}
+            {% for song in songs %}
             <td>
                 <div class="song">
                     <img src="../../static/img/symbol1.PNG" width="25px" height="25px">
-                    <a href="/play/{{ song }}"><h4>{{ song }}</h4></a>
+                    <a href="/play/{{ song }}">
+                        <h4>{{ song }}</h4>
+                    </a>
                 </div>
             </td>
-	    {% endfor %}
+            {% endfor %}
         </tr>
     </table>
 </div>

@@ -4,7 +4,8 @@ window.onload = function () {
         var xobj = new XMLHttpRequest();
         xobj.overrideMimeType("application/json");
         var song_name = document.getElementById("song_name").innerHTML;
-        xobj.open('GET', '/api/' + song_name, true);
+        //xobj.open('GET', '/api/' + song_name, true);
+        xobj.open('GET', '../static/can-can.json', true);
         xobj.onreadystatechange = function () {
             if (xobj.readyState == 4 && xobj.status == "200") {
                 callback(xobj.responseText);
@@ -19,6 +20,12 @@ window.onload = function () {
         // piano
         var whiteKeyWidth = 40;
         var blackKeyWidth = 25;
+        var availableKeys = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
+            "a", "s", "d", "f", "g", "h", "j", "k", "l", ";",
+            "z", "x", "c", "v", "b", "n", "m", ",", ".",
+            "1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
+            ":", "'", "\"", "?", "/", "[", "]", "-", "=", "+",
+            "!", "@", "#", "$", "%", "^", "&", "*", "(", ")"];
         var availableNotes = ["c3", "d3", "e3", "f3", "g3", "a3", "b3",
             "c4", "d4", "e4", "f4", "g4", "a4", "b4",
             "c5", "d5", "e5", "f5", "g5", "a5", "b5", "c6"]
@@ -61,7 +68,6 @@ window.onload = function () {
             label.classList.add("label");
             label.innerHTML = key;
 
-            console.log(data.keyTone[key]);
             document.getElementById(data.keyTone[key]).append(label);
         }
         var wrong = new Audio("../static/notes/wrong.mp3");
@@ -144,6 +150,15 @@ window.onload = function () {
             Mousetrap.bind(key, function (e, combo) {
                 document.getElementById(data.keyTone[combo]).classList.remove("pressed");
             }, "keyup");
+        }
+
+        // bind unused keys
+        for (var i = 0; i < availableKeys.length; i++) {
+            if (!notes[availableKeys[i]]) {
+                Mousetrap.bind(availableKeys[i], function () {
+                    playNote(wrong);
+                });
+            }
         }
     }); // end callback of loadJSON()
 }
