@@ -148,6 +148,7 @@ window.onload = function () {
             })
 
             Mousetrap.bind(key, function (e, combo) {
+                console.log(combo);
                 document.getElementById(data.keyTone[combo]).classList.remove("pressed");
             }, "keyup");
         }
