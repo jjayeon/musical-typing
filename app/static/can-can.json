@@ -1,0 +1,25 @@
+{
+    "title": "Can Can",
+    "toneRange": [
+        "e3",
+        "f5"
+    ],
+    "keyTone": {
+        "a": "g3",
+        "s": "a3",
+        "d": "b3",
+        "f": "c-4",
+        "r": "d4",
+        "t": "e4",
+        "y": "f-4",
+        "u": "g4",
+        "j": "a4",
+        "k": "b4",
+        "l": "c-5",
+        ";": "d5",
+        "i": "e5",
+        "e": "c4",
+        "o": "g-4"
+    },
+    "sequence": "sttytrryuk;kkjjkffkjrryytytytytsttytrryuk;kkjjkffkjrryytyttrryrdsstyuytryrdsojkli;;yrdsstyuytryrdsojkl;jlj;jlj;jlj;jlj;rrraasedsrrrtdesssedsauytredsaasedsrrrtdesssedsarsda"
+}
