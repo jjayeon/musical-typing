@@ -1,0 +1,42 @@
+{
+    "title": "Can Can",
+    "toneRange": [
+        "d3",
+        "b5"
+    ],
+    "keyTone": {
+        "!": "a5",
+        "p": "g-5",
+        "o": "g5",
+        "i": "f-5",
+        "u": "f5",
+        "y": "e5",
+        "t": "d-5",
+        "r": "d5",
+        "e": "c-5",
+        "w": "c5",
+        "q": "b4",
+        "'": "a-4",
+        ";": "a4",
+        "l": "g-4",
+        "k": "g4",
+        "j": "f-4",
+        "h": "f4",
+        "g": "e4",
+        "f": "d-4",
+        "d": "d4",
+        "s": "c-4",
+        "a": "c4",
+        "?": "b3",
+        ".": "a-3",
+        ",": "a3",
+        "m": "g-3",
+        "n": "g3",
+        "b": "f-3",
+        "v": "f3",
+        "c": "e3",
+        "x": "d-3",
+        "z": "d3"
+    },
+    "sequence": "!poioiuyuytrewq';lkjkjhghgfdsa?.,mnbnbvc,mnbnbvc,mnbv.,m,mnbvbnm,mnbv.,m,mnbvbnm,mnbnbvcvbnm,?,m,mnbnbvcvbnm,?asd"
+}
