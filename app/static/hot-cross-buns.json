@@ -1,0 +1,13 @@
+{ 
+    "title": "Hot Cross Buns", 
+    "toneRange": [
+        "c4", 
+        "c5"
+    ], 
+    "keyTone": { 
+        "j": "c4", 
+        "k": "d4", 
+        "l": "e4"
+    }, 
+    "sequence": "lkjlkjjjjjkkkklkj"
+}
